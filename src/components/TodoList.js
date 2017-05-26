@@ -46,10 +46,11 @@ class TodoList extends Component {
   }
 
   addTodo () {
-    const { addTodo, inputText } = this.props
+    const { addTodo, inputText, inputTextChanged } = this.props
     const { next_todo_id } = this.state
-    if (!!inputText) {
-      addTodo({text: inputText, id: next_todo_id})
+    if (!!inputText && !!inputText.trim()) {
+      addTodo({text: inputText.trim(), id: next_todo_id})
+      inputTextChanged('')
       this.setState({next_todo_id: next_todo_id + 1})
     }
   }

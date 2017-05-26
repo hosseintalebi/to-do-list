@@ -28,7 +28,6 @@ export default class TodoInput extends Component {
   handleKeyPress(e) {
     if (e.key === 'Enter') {
       this.props.addTodo(this.props.inputText)
-      this.props.inputTextChanged('')
     }
   }
 }
