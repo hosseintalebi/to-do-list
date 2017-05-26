@@ -40,7 +40,6 @@ class TodoList extends Component {
           return true
       }
     })
-    debugger
     return filteredList.sort((a, b) => a.id < b.id).map((todo) => (
       <TodoItem todo={todo} key={todo.id} toggleDone={toggleDone} removeTodo={removeTodo} />
     ))
