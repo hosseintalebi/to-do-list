@@ -7,11 +7,14 @@ import {
   addTodo,
   toggleDone,
   removeTodo,
+  changeFilter,
 } from '../data/actions'
 
 import TodoItem from './TodoItem'
 import TodoInput from './TodoInput'
 import Title from './Title'
+
+import { ALL, COMPLETED, ACTIVE } from '../data/constants'
 
 import './styles/TodoList.css'
 
@@ -26,9 +29,20 @@ class TodoList extends Component {
   }
 
   renderTodoItems () {
-    const { todoList, toggleDone, removeTodo } = this.props
-    return _.keys(todoList).sort((a, b) => a < b).map((id) => (
-      <TodoItem todo={todoList[id]} key={id} toggleDone={toggleDone} removeTodo={removeTodo} />
+    const { todoList, toggleDone, removeTodo, filter } = this.props
+    const filteredList = _.filter(todoList, (todo) => {
+      switch (filter) {
+        case ACTIVE:
+          return !todo.done
+        case COMPLETED:
+          return todo.done
+        default:
+          return true
+      }
+    })
+    debugger
+    return filteredList.sort((a, b) => a.id < b.id).map((todo) => (
+      <TodoItem todo={todo} key={todo.id} toggleDone={toggleDone} removeTodo={removeTodo} />
     ))
   }
 
@@ -39,6 +53,29 @@ class TodoList extends Component {
     this.setState({next_todo_id: next_todo_id + 1})
   }
 
+  renderFooter () {
+    const { todoList, changeFilter, filter } = this.props
+    if (_.size(todoList)) {
+      return (
+        <div className='footer'>
+          <div
+            className={'filter-botton' + (filter === ALL ? ' filter-botton-active' : '')}
+            onClick={() => changeFilter(ALL)}>
+            All
+          </div>
+          <div
+            className={'filter-botton' + (filter === COMPLETED ? ' filter-botton-active' : '')}
+            onClick={() => changeFilter(COMPLETED)}>
+            Completed
+          </div>
+          <div className={'filter-botton' + (filter === ACTIVE ? ' filter-botton-active' : '')}
+            onClick={() => changeFilter(ACTIVE)}>
+            Active
+          </div>
+        </div>
+      )
+    }
+  }
   render () {
     const {inputTextChanged, inputText} = this.props
     return (
@@ -54,6 +91,7 @@ class TodoList extends Component {
         <div className='todo-item-container'>
           {this.renderTodoItems()}
         </div>
+        {this.renderFooter()}
       </div>
     )
   }
@@ -62,8 +100,17 @@ class TodoList extends Component {
 function mapStateToProps(state) {
   return {
     inputText: state.inputText,
-    todoList: state.todoList
+    todoList: state.todoList,
+    filter: state.filter,
   }
 }
 
-export default connect(mapStateToProps, {inputTextChanged, addTodo, toggleDone, removeTodo})(TodoList)
+const dispachToProps = {
+  inputTextChanged,
+  addTodo,
+  toggleDone,
+  removeTodo,
+  changeFilter,
+}
+
+export default connect(mapStateToProps, dispachToProps)(TodoList)

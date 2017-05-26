@@ -3,6 +3,7 @@ import {
   ADD_TODO,
   REMOVE_TODO,
   TOGGLE_DONE,
+  CHANGE_FILTER,
 } from '../constants'
 
 
@@ -31,5 +32,12 @@ export function toggleDone (id, value) {
   return {
     type: TOGGLE_DONE,
     payload: {id: id, value: value},
+  }
+}
+
+export function changeFilter (filter) {
+  return {
+    type: CHANGE_FILTER,
+    payload: filter,
   }
 }
