@@ -1,0 +1,16 @@
+.todo-list {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.input-wrapper {
+  width: 50%;
+  min-width: 300px;
+  display: flex;
+}
+
+.todo-item-container {
+  padding: 10px;
+  width: 50%;
+}

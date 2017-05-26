@@ -1,0 +1,28 @@
+.todo-item {
+  display: flex;
+  border-bottom: 1px solid #ededed;
+  font-size: 24px;
+  align-items: center;
+  padding: 10px 5px;
+}
+
+.todo-text-done {
+  text-decoration: line-through;
+  color: #999 !important;
+}
+
+.todo-text {
+  color: #666;
+  padding-left: 10px;
+}
+
+.remove-todo {
+  margin-left: auto;
+  margin-right: 5px;
+  font-size: 18px;
+  color: #aaa;
+  cursor: pointer;
+}
+.remove-todo:hover {
+  color: #666;
+}

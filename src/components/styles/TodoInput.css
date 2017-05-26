@@ -1,0 +1,14 @@
+.todo-list input[type="text"] {
+  width: 100%;
+  border: none;
+  border-bottom: solid 2px #c9c9c9;
+  transition: border 0.3s;
+  font-size: 18px;
+  padding: 10px 20px;
+}
+
+.todo-list input[type="text"]:focus,
+.todo-list input[type="text"].focus {
+  outline-width: 0;
+  border-bottom: solid 2px #3498db;
+}
